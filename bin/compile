@@ -19,7 +19,7 @@ topic() {
 install_system_deps() {
 	topic "Installing System Dependencies"
 
-	APT_BUILDPACK="https://github.com/heroku/heroku-buildpack-apt"
+	APT_BUILDPACK="https://github.com/KinnTech/heroku-buildpack-apt"
 	local buildpack_tmpdir=$(mktemp -d)
 	cd $buildpack_tmpdir && git clone $APT_BUILDPACK .
 
@@ -90,8 +90,13 @@ EOF
 libvpx7
 EOF
 	    ;;
+		"heroku-24")
+	    cat << EOF >>$build_tmpdir/Aptfile
+libvpx9
+EOF
+	    ;;
 	  *)
-	    error "STACK must be 'heroku-18', 'heroku-20', or 'heroku-22'"
+	    error "STACK must be 'heroku-18', 'heroku-20', 'heroku-22', or 'heroku-24'"
 	esac
 
 	local cache_tmpdir=$(mktemp -d)
